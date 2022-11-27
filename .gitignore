@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.py[cod]
+*$py.class
+
+# Folders 
+venvs
+data
+.vscode
+outputs
+src/outputs
+notebooks/Company
+docs/Company
+models/VAE
+docs/results/MobileNet/WSA1K_*
+deprecated
+docs/results/Simple/results.csv
+.git-rewrite
+src/data_preprocess/company_data_process.py
+src/Company
+
+# C extensions
+*.so

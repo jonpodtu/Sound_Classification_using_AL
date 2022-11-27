@@ -1,0 +1,58 @@
+defaults:
+  - exp: setup1
+  - _self_
+
+# Active Learning
+budget: 96
+initial_budget: 12
+n_avg: 1
+n_samples: 4
+sample_first: False
+
+
+# General setup
+batch_size: 4
+seed: 41
+AL_methods: ["VAAL"]
+TaskLearners: ["Simple"]
+early_stop: 20
+use_navg_as_DR: False
+use_plots: True
+
+# Tasklearner
+n_class: 3
+num_epochs: 200
+
+# Paths
+paths:
+  train: data/processed/ESC50_3Class/train.csv
+  test: data/processed/ESC50_3Class/test.csv
+
+
+# Hyperparameter optimization
+n_folds: 5
+
+Simple:
+  train: data/processed/ESC50_3Class/train_pca.pt
+  test: data/processed/ESC50_3Class/test_pca.pt
+  train_vaal: data/processed/ESC50_3Class/train_32x32
+  test_vaal: data/processed/ESC50_3Class/test_32x32
+  DR: 2
+  learning_rates: [0.001, 0.0005, 0.0002, 0.0001]
+  weight_decays: [0.01, 0.001, 0.0001, 0.00005]
+  Optimizer: 'Adam'
+  aud_conf: {}
+
+CNN:
+  train: data/processed/ESC50_3Class/train_498x128
+  test: data/processed/ESC50_3Class/test_498x128
+  train_vaal: data/processed/ESC50_3Class/train_32x32
+  test_vaal: data/processed/ESC50_3Class/train_32x32
+  DR: False
+  learning_rates: [0.001, 0.0005, 0.0002, 0.0001]
+  weight_decays: [0.01, 0.001, 0.0001, 0.00005]
+  Optimizer: 'Adam'
+
+
+vaal:
+  dataset_size: 96

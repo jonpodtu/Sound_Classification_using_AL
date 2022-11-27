@@ -1,0 +1,136 @@
+Loaded module: cuda/11.6
+/zhome/0b/6/146094/Bachelorproject/src/main_ESC50.py:15: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_path="config", config_name="n_pc_run")
+/zhome/0b/6/146094/Bachelorproject/venv/lib/python3.9/site-packages/hydra/_internal/hydra.py:119: UserWarning: Future Hydra versions will no longer change working directory at job runtime by default.
+See https://hydra.cc/docs/next/upgrades/1.1_to_1.2/changes_to_job_working_dir/ for more information.
+  ret = run_job(
+  0%|          | 0/18 [00:00<?, ?it/s]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [04:09, 249.21s/it][A
+Performing Cross-validation: 2it [07:07, 207.39s/it][A
+Performing Cross-validation: 3it [11:14, 225.70s/it][A
+Performing Cross-validation: 4it [13:54, 199.45s/it][A
+Performing Cross-validation: 5it [16:32, 184.80s/it][APerforming Cross-validation: 5it [16:32, 198.57s/it]
+  6%|▌         | 1/18 [16:43<4:44:11, 1003.02s/it]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [02:50, 170.57s/it][A
+Performing Cross-validation: 2it [06:06, 185.55s/it][A
+Performing Cross-validation: 3it [09:38, 197.41s/it][A
+Performing Cross-validation: 4it [13:18, 206.45s/it][A
+Performing Cross-validation: 5it [16:36, 203.55s/it][APerforming Cross-validation: 5it [16:36, 199.37s/it]
+ 11%|█         | 2/18 [33:33<4:28:36, 1007.26s/it]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [05:20, 320.16s/it][A
+Performing Cross-validation: 2it [10:00, 297.00s/it][A
+Performing Cross-validation: 3it [14:15, 277.66s/it][A
+Performing Cross-validation: 4it [18:48, 275.69s/it][A
+Performing Cross-validation: 5it [24:28, 298.94s/it][APerforming Cross-validation: 5it [24:28, 293.68s/it]
+ 17%|█▋        | 3/18 [58:36<5:08:24, 1233.64s/it]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [05:31, 331.38s/it][A
+Performing Cross-validation: 2it [11:31, 348.09s/it][A
+Performing Cross-validation: 3it [17:35, 355.59s/it][A
+Performing Cross-validation: 4it [23:20, 351.26s/it][A
+Performing Cross-validation: 5it [30:03, 369.96s/it][APerforming Cross-validation: 5it [30:03, 360.69s/it]
+ 22%|██▏       | 4/18 [1:29:20<5:44:07, 1474.82s/it]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [07:01, 421.26s/it][A
+Performing Cross-validation: 2it [13:33, 404.34s/it][A
+Performing Cross-validation: 3it [20:45, 417.05s/it][A
+Performing Cross-validation: 4it [27:09, 403.68s/it][A
+Performing Cross-validation: 5it [34:23, 414.59s/it][APerforming Cross-validation: 5it [34:23, 412.61s/it]
+ 28%|██▊       | 5/18 [2:04:02<6:06:56, 1693.58s/it]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [07:15, 435.95s/it][A
+Performing Cross-validation: 2it [13:55, 414.63s/it][A
+Performing Cross-validation: 3it [20:50, 414.94s/it][A
+Performing Cross-validation: 4it [28:11, 425.04s/it][A
+Performing Cross-validation: 5it [35:24, 427.90s/it][APerforming Cross-validation: 5it [35:24, 424.89s/it]
+ 33%|███▎      | 6/18 [2:39:53<6:09:51, 1849.30s/it]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [06:51, 411.39s/it][A
+Performing Cross-validation: 2it [14:22, 434.75s/it][A
+Performing Cross-validation: 3it [21:01, 418.51s/it][A
+Performing Cross-validation: 4it [27:50, 414.80s/it][A
+Performing Cross-validation: 5it [35:00, 420.26s/it][APerforming Cross-validation: 5it [35:00, 420.15s/it]
+ 39%|███▉      | 7/18 [3:15:35<5:56:34, 1944.99s/it]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [08:11, 491.52s/it][A
+Performing Cross-validation: 2it [15:25, 457.87s/it][A
+Performing Cross-validation: 3it [23:31, 470.56s/it][A
+Performing Cross-validation: 4it [30:58, 461.19s/it][A
+Performing Cross-validation: 5it [38:18, 453.74s/it][APerforming Cross-validation: 5it [38:18, 459.77s/it]
+ 44%|████▍     | 8/18 [3:54:31<5:44:54, 2069.46s/it]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [07:52, 472.77s/it][A
+Performing Cross-validation: 2it [15:21, 458.37s/it][A
+Performing Cross-validation: 3it [23:08, 462.53s/it][A
+Performing Cross-validation: 4it [30:18, 449.74s/it][A
+Performing Cross-validation: 5it [37:27, 442.33s/it][APerforming Cross-validation: 5it [37:27, 449.57s/it]
+ 50%|█████     | 9/18 [4:32:40<5:20:41, 2137.92s/it]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [07:12, 432.75s/it][A
+Performing Cross-validation: 2it [14:26, 433.10s/it][A
+Performing Cross-validation: 3it [22:06, 445.37s/it][A
+Performing Cross-validation: 4it [30:16, 463.00s/it][A
+Performing Cross-validation: 5it [38:15, 468.91s/it][APerforming Cross-validation: 5it [38:15, 459.10s/it]
+ 56%|█████▌    | 10/18 [5:11:17<4:52:27, 2193.40s/it]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [08:13, 493.70s/it][A
+Performing Cross-validation: 2it [16:14, 485.91s/it][A
+Performing Cross-validation: 3it [23:46, 470.79s/it][A
+Performing Cross-validation: 4it [31:54, 477.49s/it][A
+Performing Cross-validation: 5it [39:18, 465.46s/it][APerforming Cross-validation: 5it [39:18, 471.77s/it]
+ 61%|██████    | 11/18 [5:51:21<4:23:24, 2257.79s/it]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [08:20, 500.57s/it][A
+Performing Cross-validation: 2it [15:57, 474.87s/it][A
+Performing Cross-validation: 3it [24:06, 481.15s/it][A
+Performing Cross-validation: 4it [32:08, 481.50s/it][A
+Performing Cross-validation: 5it [40:09, 481.47s/it][APerforming Cross-validation: 5it [40:09, 481.91s/it]
+ 67%|██████▋   | 12/18 [6:32:16<3:51:46, 2317.78s/it]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [07:21, 441.45s/it][A
+Performing Cross-validation: 2it [15:21, 464.21s/it][A
+Performing Cross-validation: 3it [23:10, 466.48s/it][A
+Performing Cross-validation: 4it [31:28, 478.80s/it][A
+Performing Cross-validation: 5it [40:00, 490.65s/it][APerforming Cross-validation: 5it [40:00, 480.03s/it]
+ 72%|███████▏  | 13/18 [7:13:02<3:16:22, 2356.58s/it]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [07:45, 465.39s/it][A
+Performing Cross-validation: 2it [15:42, 472.55s/it][A
+Performing Cross-validation: 3it [23:58, 483.22s/it][A
+Performing Cross-validation: 4it [31:47, 477.41s/it][A
+Performing Cross-validation: 5it [39:40, 475.84s/it][APerforming Cross-validation: 5it [39:40, 476.09s/it]
+ 78%|███████▊  | 14/18 [7:53:20<2:38:20, 2375.06s/it]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [08:16, 496.80s/it][A
+Performing Cross-validation: 2it [16:50, 506.51s/it][A
+Performing Cross-validation: 3it [25:08, 502.89s/it][A
+Performing Cross-validation: 4it [33:18, 497.56s/it][A
+Performing Cross-validation: 5it [40:39, 477.17s/it][APerforming Cross-validation: 5it [40:39, 487.82s/it]
+ 83%|████████▎ | 15/18 [8:34:25<2:00:06, 2402.11s/it]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [09:04, 544.13s/it][A
+Performing Cross-validation: 2it [17:39, 527.21s/it][A
+Performing Cross-validation: 3it [26:20, 524.54s/it][A
+Performing Cross-validation: 4it [35:01, 523.07s/it][A
+Performing Cross-validation: 5it [43:10, 510.90s/it][APerforming Cross-validation: 5it [43:10, 518.20s/it]
+ 89%|████████▉ | 16/18 [9:18:04<1:22:14, 2467.37s/it]
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [08:17, 497.52s/it][A
+Performing Cross-validation: 2it [17:46, 539.74s/it][A
+Performing Cross-validation: 3it [27:14, 552.56s/it][A
+Performing Cross-validation: 4it [36:13, 547.00s/it][A
+Performing Cross-validation: 5it [45:44, 555.79s/it][APerforming Cross-validation: 5it [45:44, 548.89s/it]
+ 94%|█████████▍| 17/18 [10:04:38<42:45, 2565.68s/it] 
+Performing Cross-validation: 0it [00:00, ?it/s][A
+Performing Cross-validation: 1it [08:20, 500.08s/it][A
+Performing Cross-validation: 2it [17:32, 530.62s/it][A
+Performing Cross-validation: 3it [26:26, 532.46s/it][A
+Performing Cross-validation: 4it [35:44, 542.57s/it][A
+Performing Cross-validation: 5it [44:41, 540.50s/it][APerforming Cross-validation: 5it [44:41, 536.32s/it]
+100%|██████████| 18/18 [10:50:01<00:00, 2613.11s/it]100%|██████████| 18/18 [10:50:01<00:00, 2166.77s/it]

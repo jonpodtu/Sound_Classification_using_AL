@@ -1,0 +1,82 @@
+exp:
+  budget: 512
+budget: 1600
+initial_budget: 1600
+n_avg:
+- 2
+- 3
+- 5
+- 8
+- 12
+- 16
+- 20
+- 30
+- 50
+- 100
+- 200
+- 300
+- 400
+- 500
+- 700
+- 1000
+- 1300
+- 1600
+n_samples: 0
+batch_size: 50
+seed: 41
+AL_methods:
+- Random
+TaskLearners:
+- Simple
+early_stop: 50
+use_navg_as_DR: true
+use_plots: false
+n_class: 50
+num_epochs: 300
+paths:
+  train: data/processed/ESC50/train.csv
+  test: data/processed/ESC50/test.csv
+n_folds: 5
+Simple:
+  train: data/processed/ESC50/train_pca.pt
+  test: data/processed/ESC50/test_pca.pt
+  train_vaal: data/processed/ESC50/train_128
+  test_vaal: data/processed/ESC50/test_128
+  DR: 0
+  learning_rates:
+  - 0.001
+  - 0.0005
+  - 0.0002
+  - 0.0001
+  weight_decays:
+  - 0.01
+  - 0.001
+  - 0.0001
+  - 5.0e-05
+  Optimizer: Adam
+  aud_conf: {}
+CNN:
+  train: data/processed/ESC50/train_498
+  test: data/processed/ESC50/test_498
+  train_vaal: data/processed/ESC50/train_128
+  test_vaal: data/processed/ESC50/test_128
+  DR: false
+  learning_rates:
+  - 0.001
+  - 0.0005
+  - 0.0002
+  - 0.0001
+  weight_decays:
+  - 0.01
+  - 0.001
+  - 0.0001
+  - 5.0e-05
+  Optimizer: Adam
+  aud_conf:
+    n_mels: 128
+    target_length: 1200
+    dataset_mean: -6.0197644
+    dataset_std: 5.5729666
+vaal:
+  dataset_size: 1600
+  spectrogram_length: 1200

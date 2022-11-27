@@ -1,0 +1,677 @@
+Sat Oct 29 16:10:02 2022       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 515.65.01    Driver Version: 515.65.01    CUDA Version: 11.7     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  Tesla V100-PCIE...  On   | 00000000:37:00.0 Off |                    0 |
+| N/A   33C    P0    26W / 250W |      0MiB / 16384MiB |      0%   E. Process |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+exp:
+  budget: 512
+budget: 1600
+initial_budget: 1600
+n_avg:
+- 2
+- 3
+- 5
+- 8
+- 12
+- 16
+- 20
+- 30
+- 50
+- 100
+- 200
+- 300
+- 400
+- 500
+- 700
+- 1000
+- 1300
+- 1600
+n_samples: 0
+batch_size: 50
+seed: 41
+AL_methods:
+- Random
+TaskLearners:
+- Simple
+early_stop: 50
+use_navg_as_DR: true
+use_plots: false
+n_class: 50
+num_epochs: 300
+paths:
+  train: data/processed/ESC50/train.csv
+  test: data/processed/ESC50/test.csv
+n_folds: 5
+Simple:
+  train: data/processed/ESC50/train_pca.pt
+  test: data/processed/ESC50/test_pca.pt
+  train_vaal: data/processed/ESC50/train_128
+  test_vaal: data/processed/ESC50/test_128
+  DR: 0
+  learning_rates:
+  - 0.001
+  - 0.0005
+  - 0.0002
+  - 0.0001
+  weight_decays:
+  - 0.01
+  - 0.001
+  - 0.0001
+  - 5.0e-05
+  Optimizer: Adam
+  aud_conf: {}
+CNN:
+  train: data/processed/ESC50/train_498
+  test: data/processed/ESC50/test_498
+  train_vaal: data/processed/ESC50/train_128
+  test_vaal: data/processed/ESC50/test_128
+  DR: false
+  learning_rates:
+  - 0.001
+  - 0.0005
+  - 0.0002
+  - 0.0001
+  weight_decays:
+  - 0.01
+  - 0.001
+  - 0.0001
+  - 5.0e-05
+  Optimizer: Adam
+  aud_conf:
+    n_mels: 128
+    target_length: 1200
+    dataset_mean: -6.0197644
+    dataset_std: 5.5729666
+vaal:
+  dataset_size: 1600
+  spectrogram_length: 1200
+
+Everything will be dropped in the working directory: /zhome/0b/6/146094/Bachelorproject/outputs/2022-10-29/16-10-16
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.0001 
+ Weight Decay: 0.0001 
+with a mean acc. of 5.437500000000001
+Epoch:10/300 Train. Loss:3.902 Val. Loss:3.900 Training Acc. 4.25 % Val. Acc. 4.75 %
+Epoch:20/300 Train. Loss:3.888 Val. Loss:3.889 Training Acc. 5.19 % Val. Acc. 5.25 %
+Epoch:30/300 Train. Loss:3.887 Val. Loss:3.890 Training Acc. 5.44 % Val. Acc. 5.75 %
+Epoch:40/300 Train. Loss:3.888 Val. Loss:3.893 Training Acc. 5.81 % Val. Acc. 5.25 %
+Epoch:50/300 Train. Loss:3.888 Val. Loss:3.891 Training Acc. 5.50 % Val. Acc. 5.25 %
+Epoch:60/300 Train. Loss:3.887 Val. Loss:3.893 Training Acc. 5.62 % Val. Acc. 5.00 %
+Epoch:70/300 Train. Loss:3.888 Val. Loss:3.893 Training Acc. 5.31 % Val. Acc. 5.00 %
+Early stopping
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.0001 
+ Weight Decay: 0.001 
+with a mean acc. of 7.75
+Epoch:10/300 Train. Loss:3.886 Val. Loss:3.891 Training Acc. 5.69 % Val. Acc. 5.25 %
+Epoch:20/300 Train. Loss:3.874 Val. Loss:3.881 Training Acc. 6.81 % Val. Acc. 6.50 %
+Epoch:30/300 Train. Loss:3.864 Val. Loss:3.877 Training Acc. 7.94 % Val. Acc. 6.75 %
+Epoch:40/300 Train. Loss:3.864 Val. Loss:3.878 Training Acc. 8.44 % Val. Acc. 6.50 %
+Epoch:50/300 Train. Loss:3.862 Val. Loss:3.878 Training Acc. 7.75 % Val. Acc. 6.50 %
+Epoch:60/300 Train. Loss:3.859 Val. Loss:3.877 Training Acc. 8.81 % Val. Acc. 6.50 %
+Epoch:70/300 Train. Loss:3.855 Val. Loss:3.879 Training Acc. 9.12 % Val. Acc. 6.25 %
+Epoch:80/300 Train. Loss:3.857 Val. Loss:3.879 Training Acc. 8.69 % Val. Acc. 6.50 %
+Epoch:90/300 Train. Loss:3.855 Val. Loss:3.877 Training Acc. 9.25 % Val. Acc. 6.50 %
+Early stopping
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.0001 
+ Weight Decay: 0.0001 
+with a mean acc. of 11.5
+Epoch:10/300 Train. Loss:3.877 Val. Loss:3.890 Training Acc. 6.44 % Val. Acc. 5.50 %
+Epoch:20/300 Train. Loss:3.868 Val. Loss:3.885 Training Acc. 7.25 % Val. Acc. 5.75 %
+Epoch:30/300 Train. Loss:3.865 Val. Loss:3.882 Training Acc. 7.81 % Val. Acc. 6.00 %
+Epoch:40/300 Train. Loss:3.858 Val. Loss:3.878 Training Acc. 8.44 % Val. Acc. 6.25 %
+Epoch:50/300 Train. Loss:3.848 Val. Loss:3.868 Training Acc. 9.88 % Val. Acc. 7.25 %
+Epoch:60/300 Train. Loss:3.847 Val. Loss:3.866 Training Acc. 9.94 % Val. Acc. 7.75 %
+Epoch:70/300 Train. Loss:3.837 Val. Loss:3.862 Training Acc. 10.81 % Val. Acc. 8.50 %
+Epoch:80/300 Train. Loss:3.839 Val. Loss:3.858 Training Acc. 10.94 % Val. Acc. 9.25 %
+Epoch:90/300 Train. Loss:3.837 Val. Loss:3.858 Training Acc. 10.88 % Val. Acc. 8.75 %
+Epoch:100/300 Train. Loss:3.833 Val. Loss:3.849 Training Acc. 11.88 % Val. Acc. 9.75 %
+Epoch:110/300 Train. Loss:3.825 Val. Loss:3.847 Training Acc. 12.69 % Val. Acc. 10.00 %
+Epoch:120/300 Train. Loss:3.826 Val. Loss:3.845 Training Acc. 12.50 % Val. Acc. 10.00 %
+Epoch:130/300 Train. Loss:3.821 Val. Loss:3.846 Training Acc. 12.75 % Val. Acc. 10.00 %
+Epoch:140/300 Train. Loss:3.819 Val. Loss:3.846 Training Acc. 12.81 % Val. Acc. 10.25 %
+Epoch:150/300 Train. Loss:3.823 Val. Loss:3.845 Training Acc. 12.94 % Val. Acc. 10.00 %
+Epoch:160/300 Train. Loss:3.817 Val. Loss:3.846 Training Acc. 13.12 % Val. Acc. 10.25 %
+Epoch:170/300 Train. Loss:3.814 Val. Loss:3.845 Training Acc. 13.38 % Val. Acc. 10.25 %
+Epoch:180/300 Train. Loss:3.817 Val. Loss:3.844 Training Acc. 13.38 % Val. Acc. 11.00 %
+Epoch:190/300 Train. Loss:3.816 Val. Loss:3.843 Training Acc. 12.94 % Val. Acc. 10.75 %
+Epoch:200/300 Train. Loss:3.812 Val. Loss:3.843 Training Acc. 13.69 % Val. Acc. 10.50 %
+Epoch:210/300 Train. Loss:3.819 Val. Loss:3.844 Training Acc. 13.19 % Val. Acc. 10.75 %
+Epoch:220/300 Train. Loss:3.809 Val. Loss:3.842 Training Acc. 14.06 % Val. Acc. 11.25 %
+Epoch:230/300 Train. Loss:3.817 Val. Loss:3.843 Training Acc. 13.00 % Val. Acc. 11.25 %
+Epoch:240/300 Train. Loss:3.810 Val. Loss:3.842 Training Acc. 13.81 % Val. Acc. 10.50 %
+Early stopping
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.0005 
+ Weight Decay: 5e-05 
+with a mean acc. of 14.937499999999998
+Epoch:10/300 Train. Loss:3.841 Val. Loss:3.841 Training Acc. 10.25 % Val. Acc. 10.50 %
+Epoch:20/300 Train. Loss:3.820 Val. Loss:3.836 Training Acc. 12.69 % Val. Acc. 11.25 %
+Epoch:30/300 Train. Loss:3.805 Val. Loss:3.837 Training Acc. 14.06 % Val. Acc. 11.00 %
+Epoch:40/300 Train. Loss:3.796 Val. Loss:3.835 Training Acc. 14.75 % Val. Acc. 11.25 %
+Epoch:50/300 Train. Loss:3.784 Val. Loss:3.824 Training Acc. 16.00 % Val. Acc. 11.75 %
+Epoch:60/300 Train. Loss:3.775 Val. Loss:3.820 Training Acc. 16.62 % Val. Acc. 12.50 %
+Epoch:70/300 Train. Loss:3.763 Val. Loss:3.817 Training Acc. 18.25 % Val. Acc. 12.25 %
+Epoch:80/300 Train. Loss:3.760 Val. Loss:3.816 Training Acc. 18.56 % Val. Acc. 12.50 %
+Epoch:90/300 Train. Loss:3.759 Val. Loss:3.805 Training Acc. 18.56 % Val. Acc. 14.25 %
+Epoch:100/300 Train. Loss:3.758 Val. Loss:3.805 Training Acc. 18.69 % Val. Acc. 14.25 %
+Epoch:110/300 Train. Loss:3.752 Val. Loss:3.810 Training Acc. 19.19 % Val. Acc. 14.00 %
+Epoch:120/300 Train. Loss:3.747 Val. Loss:3.804 Training Acc. 19.88 % Val. Acc. 13.50 %
+Epoch:130/300 Train. Loss:3.756 Val. Loss:3.805 Training Acc. 18.75 % Val. Acc. 14.25 %
+Epoch:140/300 Train. Loss:3.738 Val. Loss:3.803 Training Acc. 20.56 % Val. Acc. 14.75 %
+Epoch:150/300 Train. Loss:3.754 Val. Loss:3.808 Training Acc. 18.88 % Val. Acc. 14.00 %
+Epoch:160/300 Train. Loss:3.753 Val. Loss:3.807 Training Acc. 18.94 % Val. Acc. 13.75 %
+Epoch:170/300 Train. Loss:3.749 Val. Loss:3.801 Training Acc. 19.19 % Val. Acc. 14.25 %
+Epoch:180/300 Train. Loss:3.737 Val. Loss:3.803 Training Acc. 20.56 % Val. Acc. 14.00 %
+Epoch:190/300 Train. Loss:3.736 Val. Loss:3.800 Training Acc. 20.44 % Val. Acc. 14.00 %
+Epoch:200/300 Train. Loss:3.740 Val. Loss:3.803 Training Acc. 20.00 % Val. Acc. 14.00 %
+Epoch:210/300 Train. Loss:3.735 Val. Loss:3.803 Training Acc. 20.75 % Val. Acc. 14.25 %
+Epoch:220/300 Train. Loss:3.723 Val. Loss:3.797 Training Acc. 22.06 % Val. Acc. 14.75 %
+Epoch:230/300 Train. Loss:3.724 Val. Loss:3.793 Training Acc. 22.00 % Val. Acc. 15.25 %
+Epoch:240/300 Train. Loss:3.727 Val. Loss:3.797 Training Acc. 21.56 % Val. Acc. 14.75 %
+Epoch:250/300 Train. Loss:3.720 Val. Loss:3.798 Training Acc. 22.25 % Val. Acc. 14.75 %
+Epoch:260/300 Train. Loss:3.726 Val. Loss:3.798 Training Acc. 21.62 % Val. Acc. 14.75 %
+Epoch:270/300 Train. Loss:3.727 Val. Loss:3.796 Training Acc. 21.62 % Val. Acc. 15.25 %
+Epoch:280/300 Train. Loss:3.733 Val. Loss:3.793 Training Acc. 20.88 % Val. Acc. 15.50 %
+Epoch:290/300 Train. Loss:3.729 Val. Loss:3.793 Training Acc. 21.38 % Val. Acc. 15.50 %
+Early stopping
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.0005 
+ Weight Decay: 0.001 
+with a mean acc. of 18.5625
+Epoch:10/300 Train. Loss:3.840 Val. Loss:3.855 Training Acc. 10.44 % Val. Acc. 10.00 %
+Epoch:20/300 Train. Loss:3.813 Val. Loss:3.848 Training Acc. 13.69 % Val. Acc. 10.50 %
+Epoch:30/300 Train. Loss:3.785 Val. Loss:3.825 Training Acc. 16.50 % Val. Acc. 12.75 %
+Epoch:40/300 Train. Loss:3.770 Val. Loss:3.816 Training Acc. 17.62 % Val. Acc. 13.50 %
+Epoch:50/300 Train. Loss:3.752 Val. Loss:3.816 Training Acc. 19.50 % Val. Acc. 13.25 %
+Epoch:60/300 Train. Loss:3.749 Val. Loss:3.813 Training Acc. 19.75 % Val. Acc. 12.50 %
+Epoch:70/300 Train. Loss:3.736 Val. Loss:3.805 Training Acc. 20.88 % Val. Acc. 14.50 %
+Epoch:80/300 Train. Loss:3.732 Val. Loss:3.804 Training Acc. 21.56 % Val. Acc. 14.75 %
+Epoch:90/300 Train. Loss:3.731 Val. Loss:3.812 Training Acc. 21.88 % Val. Acc. 13.75 %
+Epoch:100/300 Train. Loss:3.725 Val. Loss:3.812 Training Acc. 21.88 % Val. Acc. 13.25 %
+Epoch:110/300 Train. Loss:3.731 Val. Loss:3.816 Training Acc. 21.50 % Val. Acc. 12.75 %
+Epoch:120/300 Train. Loss:3.729 Val. Loss:3.812 Training Acc. 21.56 % Val. Acc. 13.75 %
+Epoch:130/300 Train. Loss:3.721 Val. Loss:3.814 Training Acc. 22.44 % Val. Acc. 13.25 %
+Early stopping
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.001 
+ Weight Decay: 5e-05 
+with a mean acc. of 20.437500000000004
+Epoch:10/300 Train. Loss:3.784 Val. Loss:3.809 Training Acc. 16.56 % Val. Acc. 13.75 %
+Epoch:20/300 Train. Loss:3.750 Val. Loss:3.794 Training Acc. 19.75 % Val. Acc. 15.50 %
+Epoch:30/300 Train. Loss:3.719 Val. Loss:3.766 Training Acc. 22.56 % Val. Acc. 18.75 %
+Epoch:40/300 Train. Loss:3.709 Val. Loss:3.768 Training Acc. 23.69 % Val. Acc. 18.00 %
+Epoch:50/300 Train. Loss:3.707 Val. Loss:3.773 Training Acc. 23.38 % Val. Acc. 17.50 %
+Epoch:60/300 Train. Loss:3.691 Val. Loss:3.771 Training Acc. 25.62 % Val. Acc. 17.75 %
+Epoch:70/300 Train. Loss:3.676 Val. Loss:3.759 Training Acc. 26.56 % Val. Acc. 19.00 %
+Epoch:80/300 Train. Loss:3.661 Val. Loss:3.748 Training Acc. 28.25 % Val. Acc. 20.00 %
+Epoch:90/300 Train. Loss:3.648 Val. Loss:3.747 Training Acc. 29.62 % Val. Acc. 19.75 %
+Epoch:100/300 Train. Loss:3.629 Val. Loss:3.739 Training Acc. 31.56 % Val. Acc. 20.25 %
+Epoch:110/300 Train. Loss:3.630 Val. Loss:3.730 Training Acc. 31.19 % Val. Acc. 21.25 %
+Epoch:120/300 Train. Loss:3.629 Val. Loss:3.718 Training Acc. 31.37 % Val. Acc. 23.00 %
+Epoch:130/300 Train. Loss:3.630 Val. Loss:3.721 Training Acc. 31.50 % Val. Acc. 23.00 %
+Epoch:140/300 Train. Loss:3.607 Val. Loss:3.715 Training Acc. 33.38 % Val. Acc. 23.75 %
+Epoch:150/300 Train. Loss:3.606 Val. Loss:3.717 Training Acc. 33.31 % Val. Acc. 23.75 %
+Epoch:160/300 Train. Loss:3.610 Val. Loss:3.715 Training Acc. 33.06 % Val. Acc. 24.00 %
+Epoch:170/300 Train. Loss:3.631 Val. Loss:3.734 Training Acc. 31.62 % Val. Acc. 21.50 %
+Epoch:180/300 Train. Loss:3.611 Val. Loss:3.729 Training Acc. 33.19 % Val. Acc. 21.75 %
+Early stopping
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.001 
+ Weight Decay: 5e-05 
+with a mean acc. of 20.5
+Epoch:10/300 Train. Loss:3.790 Val. Loss:3.811 Training Acc. 15.56 % Val. Acc. 14.50 %
+Epoch:20/300 Train. Loss:3.749 Val. Loss:3.789 Training Acc. 20.06 % Val. Acc. 16.25 %
+Epoch:30/300 Train. Loss:3.708 Val. Loss:3.770 Training Acc. 23.81 % Val. Acc. 17.50 %
+Epoch:40/300 Train. Loss:3.678 Val. Loss:3.760 Training Acc. 26.94 % Val. Acc. 18.00 %
+Epoch:50/300 Train. Loss:3.671 Val. Loss:3.759 Training Acc. 27.50 % Val. Acc. 19.50 %
+Epoch:60/300 Train. Loss:3.666 Val. Loss:3.752 Training Acc. 27.50 % Val. Acc. 19.75 %
+Epoch:70/300 Train. Loss:3.657 Val. Loss:3.744 Training Acc. 28.56 % Val. Acc. 20.50 %
+Epoch:80/300 Train. Loss:3.653 Val. Loss:3.739 Training Acc. 29.31 % Val. Acc. 22.00 %
+Epoch:90/300 Train. Loss:3.633 Val. Loss:3.744 Training Acc. 31.25 % Val. Acc. 20.50 %
+Epoch:100/300 Train. Loss:3.639 Val. Loss:3.742 Training Acc. 30.38 % Val. Acc. 20.50 %
+Epoch:110/300 Train. Loss:3.638 Val. Loss:3.736 Training Acc. 30.56 % Val. Acc. 21.25 %
+Epoch:120/300 Train. Loss:3.637 Val. Loss:3.742 Training Acc. 30.44 % Val. Acc. 20.75 %
+Epoch:130/300 Train. Loss:3.631 Val. Loss:3.746 Training Acc. 31.13 % Val. Acc. 20.50 %
+Epoch:140/300 Train. Loss:3.636 Val. Loss:3.737 Training Acc. 30.56 % Val. Acc. 21.00 %
+Epoch:150/300 Train. Loss:3.614 Val. Loss:3.740 Training Acc. 32.94 % Val. Acc. 20.50 %
+Epoch:160/300 Train. Loss:3.617 Val. Loss:3.736 Training Acc. 32.44 % Val. Acc. 21.50 %
+Epoch:170/300 Train. Loss:3.591 Val. Loss:3.721 Training Acc. 35.31 % Val. Acc. 22.00 %
+Epoch:180/300 Train. Loss:3.607 Val. Loss:3.723 Training Acc. 33.56 % Val. Acc. 22.00 %
+Epoch:190/300 Train. Loss:3.585 Val. Loss:3.708 Training Acc. 36.12 % Val. Acc. 24.50 %
+Epoch:200/300 Train. Loss:3.580 Val. Loss:3.723 Training Acc. 36.25 % Val. Acc. 22.25 %
+Epoch:210/300 Train. Loss:3.571 Val. Loss:3.717 Training Acc. 37.38 % Val. Acc. 23.00 %
+Epoch:220/300 Train. Loss:3.582 Val. Loss:3.706 Training Acc. 36.12 % Val. Acc. 23.25 %
+Epoch:230/300 Train. Loss:3.564 Val. Loss:3.703 Training Acc. 37.69 % Val. Acc. 24.50 %
+Epoch:240/300 Train. Loss:3.572 Val. Loss:3.701 Training Acc. 36.88 % Val. Acc. 24.50 %
+Epoch:250/300 Train. Loss:3.575 Val. Loss:3.710 Training Acc. 36.81 % Val. Acc. 24.00 %
+Epoch:260/300 Train. Loss:3.572 Val. Loss:3.700 Training Acc. 37.25 % Val. Acc. 25.25 %
+Epoch:270/300 Train. Loss:3.567 Val. Loss:3.699 Training Acc. 37.31 % Val. Acc. 25.00 %
+Epoch:280/300 Train. Loss:3.566 Val. Loss:3.702 Training Acc. 37.69 % Val. Acc. 23.75 %
+Epoch:290/300 Train. Loss:3.568 Val. Loss:3.703 Training Acc. 37.56 % Val. Acc. 24.00 %
+Early stopping
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.0005 
+ Weight Decay: 0.0001 
+with a mean acc. of 24.8125
+Epoch:10/300 Train. Loss:3.776 Val. Loss:3.805 Training Acc. 17.50 % Val. Acc. 15.25 %
+Epoch:20/300 Train. Loss:3.720 Val. Loss:3.770 Training Acc. 23.06 % Val. Acc. 18.50 %
+Epoch:30/300 Train. Loss:3.689 Val. Loss:3.753 Training Acc. 25.94 % Val. Acc. 19.75 %
+Epoch:40/300 Train. Loss:3.675 Val. Loss:3.753 Training Acc. 27.38 % Val. Acc. 19.25 %
+Epoch:50/300 Train. Loss:3.657 Val. Loss:3.735 Training Acc. 28.88 % Val. Acc. 21.25 %
+Epoch:60/300 Train. Loss:3.643 Val. Loss:3.738 Training Acc. 30.38 % Val. Acc. 21.00 %
+Epoch:70/300 Train. Loss:3.630 Val. Loss:3.734 Training Acc. 31.50 % Val. Acc. 21.25 %
+Epoch:80/300 Train. Loss:3.617 Val. Loss:3.726 Training Acc. 32.56 % Val. Acc. 22.25 %
+Epoch:90/300 Train. Loss:3.608 Val. Loss:3.723 Training Acc. 33.56 % Val. Acc. 23.00 %
+Epoch:100/300 Train. Loss:3.611 Val. Loss:3.712 Training Acc. 33.88 % Val. Acc. 24.25 %
+Epoch:110/300 Train. Loss:3.593 Val. Loss:3.698 Training Acc. 35.25 % Val. Acc. 26.00 %
+Epoch:120/300 Train. Loss:3.583 Val. Loss:3.704 Training Acc. 35.81 % Val. Acc. 24.50 %
+Epoch:130/300 Train. Loss:3.594 Val. Loss:3.701 Training Acc. 34.88 % Val. Acc. 25.00 %
+Epoch:140/300 Train. Loss:3.570 Val. Loss:3.691 Training Acc. 37.25 % Val. Acc. 26.00 %
+Epoch:150/300 Train. Loss:3.567 Val. Loss:3.692 Training Acc. 37.75 % Val. Acc. 26.75 %
+Epoch:160/300 Train. Loss:3.552 Val. Loss:3.696 Training Acc. 39.19 % Val. Acc. 25.25 %
+Epoch:170/300 Train. Loss:3.550 Val. Loss:3.692 Training Acc. 39.69 % Val. Acc. 26.25 %
+Epoch:180/300 Train. Loss:3.551 Val. Loss:3.691 Training Acc. 39.25 % Val. Acc. 25.50 %
+Epoch:190/300 Train. Loss:3.525 Val. Loss:3.688 Training Acc. 41.69 % Val. Acc. 26.25 %
+Epoch:200/300 Train. Loss:3.544 Val. Loss:3.689 Training Acc. 39.88 % Val. Acc. 25.50 %
+Epoch:210/300 Train. Loss:3.531 Val. Loss:3.683 Training Acc. 41.12 % Val. Acc. 26.75 %
+Epoch:220/300 Train. Loss:3.522 Val. Loss:3.692 Training Acc. 42.00 % Val. Acc. 25.25 %
+Epoch:230/300 Train. Loss:3.530 Val. Loss:3.693 Training Acc. 41.19 % Val. Acc. 25.00 %
+Epoch:240/300 Train. Loss:3.531 Val. Loss:3.693 Training Acc. 41.19 % Val. Acc. 24.75 %
+Epoch:250/300 Train. Loss:3.525 Val. Loss:3.689 Training Acc. 42.06 % Val. Acc. 25.50 %
+Epoch:260/300 Train. Loss:3.529 Val. Loss:3.697 Training Acc. 41.19 % Val. Acc. 25.00 %
+Early stopping
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.001 
+ Weight Decay: 5e-05 
+with a mean acc. of 27.375000000000004
+Epoch:10/300 Train. Loss:3.715 Val. Loss:3.776 Training Acc. 23.88 % Val. Acc. 19.50 %
+Epoch:20/300 Train. Loss:3.669 Val. Loss:3.760 Training Acc. 27.50 % Val. Acc. 19.25 %
+Epoch:30/300 Train. Loss:3.611 Val. Loss:3.729 Training Acc. 33.38 % Val. Acc. 23.25 %
+Epoch:40/300 Train. Loss:3.595 Val. Loss:3.728 Training Acc. 34.94 % Val. Acc. 22.75 %
+Epoch:50/300 Train. Loss:3.581 Val. Loss:3.732 Training Acc. 36.38 % Val. Acc. 22.00 %
+Epoch:60/300 Train. Loss:3.563 Val. Loss:3.722 Training Acc. 37.94 % Val. Acc. 23.50 %
+Epoch:70/300 Train. Loss:3.558 Val. Loss:3.724 Training Acc. 38.94 % Val. Acc. 23.50 %
+Epoch:80/300 Train. Loss:3.550 Val. Loss:3.707 Training Acc. 39.25 % Val. Acc. 24.25 %
+Epoch:90/300 Train. Loss:3.550 Val. Loss:3.708 Training Acc. 39.19 % Val. Acc. 24.50 %
+Epoch:100/300 Train. Loss:3.530 Val. Loss:3.706 Training Acc. 41.38 % Val. Acc. 24.50 %
+Epoch:110/300 Train. Loss:3.528 Val. Loss:3.703 Training Acc. 41.62 % Val. Acc. 25.00 %
+Epoch:120/300 Train. Loss:3.532 Val. Loss:3.699 Training Acc. 40.94 % Val. Acc. 25.75 %
+Epoch:130/300 Train. Loss:3.504 Val. Loss:3.703 Training Acc. 43.81 % Val. Acc. 24.00 %
+Epoch:140/300 Train. Loss:3.522 Val. Loss:3.692 Training Acc. 42.06 % Val. Acc. 26.25 %
+Epoch:150/300 Train. Loss:3.499 Val. Loss:3.692 Training Acc. 44.44 % Val. Acc. 26.00 %
+Epoch:160/300 Train. Loss:3.492 Val. Loss:3.685 Training Acc. 45.19 % Val. Acc. 25.50 %
+Epoch:170/300 Train. Loss:3.491 Val. Loss:3.684 Training Acc. 45.38 % Val. Acc. 26.50 %
+Epoch:180/300 Train. Loss:3.481 Val. Loss:3.677 Training Acc. 46.19 % Val. Acc. 27.00 %
+Epoch:190/300 Train. Loss:3.487 Val. Loss:3.676 Training Acc. 45.56 % Val. Acc. 27.25 %
+Epoch:200/300 Train. Loss:3.477 Val. Loss:3.680 Training Acc. 46.88 % Val. Acc. 26.25 %
+Epoch:210/300 Train. Loss:3.469 Val. Loss:3.678 Training Acc. 47.38 % Val. Acc. 25.75 %
+Epoch:220/300 Train. Loss:3.463 Val. Loss:3.677 Training Acc. 47.81 % Val. Acc. 26.00 %
+Epoch:230/300 Train. Loss:3.457 Val. Loss:3.654 Training Acc. 48.69 % Val. Acc. 30.00 %
+Epoch:240/300 Train. Loss:3.454 Val. Loss:3.674 Training Acc. 49.06 % Val. Acc. 27.00 %
+Epoch:250/300 Train. Loss:3.457 Val. Loss:3.670 Training Acc. 48.31 % Val. Acc. 27.50 %
+Epoch:260/300 Train. Loss:3.445 Val. Loss:3.672 Training Acc. 49.81 % Val. Acc. 27.00 %
+Epoch:270/300 Train. Loss:3.462 Val. Loss:3.680 Training Acc. 48.38 % Val. Acc. 27.00 %
+Epoch:280/300 Train. Loss:3.436 Val. Loss:3.671 Training Acc. 50.94 % Val. Acc. 27.25 %
+Early stopping
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.0005 
+ Weight Decay: 0.001 
+with a mean acc. of 28.1875
+Epoch:10/300 Train. Loss:3.755 Val. Loss:3.789 Training Acc. 19.81 % Val. Acc. 17.75 %
+Epoch:20/300 Train. Loss:3.676 Val. Loss:3.743 Training Acc. 27.94 % Val. Acc. 21.75 %
+Epoch:30/300 Train. Loss:3.627 Val. Loss:3.727 Training Acc. 32.44 % Val. Acc. 23.25 %
+Epoch:40/300 Train. Loss:3.606 Val. Loss:3.714 Training Acc. 34.44 % Val. Acc. 25.50 %
+Epoch:50/300 Train. Loss:3.579 Val. Loss:3.705 Training Acc. 37.00 % Val. Acc. 26.50 %
+Epoch:60/300 Train. Loss:3.558 Val. Loss:3.704 Training Acc. 39.19 % Val. Acc. 25.25 %
+Epoch:70/300 Train. Loss:3.550 Val. Loss:3.701 Training Acc. 39.88 % Val. Acc. 25.00 %
+Epoch:80/300 Train. Loss:3.528 Val. Loss:3.692 Training Acc. 42.00 % Val. Acc. 25.50 %
+Epoch:90/300 Train. Loss:3.508 Val. Loss:3.681 Training Acc. 43.69 % Val. Acc. 27.00 %
+Epoch:100/300 Train. Loss:3.488 Val. Loss:3.678 Training Acc. 45.69 % Val. Acc. 28.25 %
+Epoch:110/300 Train. Loss:3.481 Val. Loss:3.678 Training Acc. 46.56 % Val. Acc. 28.00 %
+Epoch:120/300 Train. Loss:3.478 Val. Loss:3.683 Training Acc. 46.56 % Val. Acc. 27.75 %
+Epoch:130/300 Train. Loss:3.472 Val. Loss:3.685 Training Acc. 47.56 % Val. Acc. 27.00 %
+Epoch:140/300 Train. Loss:3.468 Val. Loss:3.682 Training Acc. 47.62 % Val. Acc. 27.75 %
+Early stopping
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.0005 
+ Weight Decay: 0.0001 
+with a mean acc. of 31.75
+Epoch:10/300 Train. Loss:3.712 Val. Loss:3.773 Training Acc. 25.37 % Val. Acc. 21.25 %
+Epoch:20/300 Train. Loss:3.608 Val. Loss:3.737 Training Acc. 34.94 % Val. Acc. 23.25 %
+Epoch:30/300 Train. Loss:3.552 Val. Loss:3.724 Training Acc. 39.38 % Val. Acc. 23.75 %
+Epoch:40/300 Train. Loss:3.548 Val. Loss:3.716 Training Acc. 39.50 % Val. Acc. 25.25 %
+Epoch:50/300 Train. Loss:3.505 Val. Loss:3.708 Training Acc. 43.94 % Val. Acc. 25.75 %
+Epoch:60/300 Train. Loss:3.476 Val. Loss:3.699 Training Acc. 47.06 % Val. Acc. 25.75 %
+Epoch:70/300 Train. Loss:3.457 Val. Loss:3.693 Training Acc. 48.94 % Val. Acc. 25.25 %
+Epoch:80/300 Train. Loss:3.442 Val. Loss:3.686 Training Acc. 50.38 % Val. Acc. 27.25 %
+Epoch:90/300 Train. Loss:3.434 Val. Loss:3.680 Training Acc. 50.94 % Val. Acc. 26.75 %
+Epoch:100/300 Train. Loss:3.408 Val. Loss:3.680 Training Acc. 53.56 % Val. Acc. 27.75 %
+Epoch:110/300 Train. Loss:3.414 Val. Loss:3.671 Training Acc. 53.00 % Val. Acc. 28.75 %
+Epoch:120/300 Train. Loss:3.378 Val. Loss:3.668 Training Acc. 56.75 % Val. Acc. 28.50 %
+Epoch:130/300 Train. Loss:3.385 Val. Loss:3.663 Training Acc. 55.75 % Val. Acc. 30.00 %
+Epoch:140/300 Train. Loss:3.372 Val. Loss:3.661 Training Acc. 56.94 % Val. Acc. 29.25 %
+Epoch:150/300 Train. Loss:3.386 Val. Loss:3.661 Training Acc. 55.38 % Val. Acc. 29.50 %
+Epoch:160/300 Train. Loss:3.380 Val. Loss:3.658 Training Acc. 56.31 % Val. Acc. 31.25 %
+Epoch:170/300 Train. Loss:3.370 Val. Loss:3.659 Training Acc. 57.25 % Val. Acc. 30.00 %
+Epoch:180/300 Train. Loss:3.380 Val. Loss:3.666 Training Acc. 56.50 % Val. Acc. 28.25 %
+Epoch:190/300 Train. Loss:3.367 Val. Loss:3.672 Training Acc. 57.44 % Val. Acc. 27.75 %
+Epoch:200/300 Train. Loss:3.346 Val. Loss:3.655 Training Acc. 59.56 % Val. Acc. 29.00 %
+Epoch:210/300 Train. Loss:3.360 Val. Loss:3.654 Training Acc. 58.25 % Val. Acc. 28.75 %
+Epoch:220/300 Train. Loss:3.357 Val. Loss:3.655 Training Acc. 58.31 % Val. Acc. 30.75 %
+Epoch:230/300 Train. Loss:3.350 Val. Loss:3.653 Training Acc. 59.19 % Val. Acc. 29.75 %
+Epoch:240/300 Train. Loss:3.358 Val. Loss:3.653 Training Acc. 58.44 % Val. Acc. 30.75 %
+Epoch:250/300 Train. Loss:3.349 Val. Loss:3.655 Training Acc. 59.50 % Val. Acc. 29.25 %
+Epoch:260/300 Train. Loss:3.337 Val. Loss:3.651 Training Acc. 60.44 % Val. Acc. 29.00 %
+Epoch:270/300 Train. Loss:3.338 Val. Loss:3.647 Training Acc. 60.50 % Val. Acc. 29.50 %
+Epoch:280/300 Train. Loss:3.336 Val. Loss:3.648 Training Acc. 60.44 % Val. Acc. 29.50 %
+Epoch:290/300 Train. Loss:3.329 Val. Loss:3.647 Training Acc. 61.25 % Val. Acc. 30.50 %
+Epoch:300/300 Train. Loss:3.344 Val. Loss:3.648 Training Acc. 59.62 % Val. Acc. 30.50 %
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.0005 
+ Weight Decay: 0.0001 
+with a mean acc. of 31.0
+Epoch:10/300 Train. Loss:3.700 Val. Loss:3.781 Training Acc. 26.06 % Val. Acc. 19.25 %
+Epoch:20/300 Train. Loss:3.564 Val. Loss:3.730 Training Acc. 38.75 % Val. Acc. 24.00 %
+Epoch:30/300 Train. Loss:3.525 Val. Loss:3.719 Training Acc. 43.12 % Val. Acc. 24.50 %
+Epoch:40/300 Train. Loss:3.498 Val. Loss:3.717 Training Acc. 44.69 % Val. Acc. 25.75 %
+Epoch:50/300 Train. Loss:3.443 Val. Loss:3.697 Training Acc. 50.62 % Val. Acc. 27.50 %
+Epoch:60/300 Train. Loss:3.424 Val. Loss:3.693 Training Acc. 51.94 % Val. Acc. 27.75 %
+Epoch:70/300 Train. Loss:3.416 Val. Loss:3.691 Training Acc. 53.44 % Val. Acc. 28.00 %
+Epoch:80/300 Train. Loss:3.368 Val. Loss:3.685 Training Acc. 57.88 % Val. Acc. 27.00 %
+Epoch:90/300 Train. Loss:3.363 Val. Loss:3.675 Training Acc. 57.88 % Val. Acc. 28.75 %
+Epoch:100/300 Train. Loss:3.373 Val. Loss:3.675 Training Acc. 57.44 % Val. Acc. 28.75 %
+Epoch:110/300 Train. Loss:3.355 Val. Loss:3.684 Training Acc. 58.94 % Val. Acc. 28.00 %
+Epoch:120/300 Train. Loss:3.327 Val. Loss:3.669 Training Acc. 61.69 % Val. Acc. 28.75 %
+Epoch:130/300 Train. Loss:3.334 Val. Loss:3.668 Training Acc. 60.88 % Val. Acc. 29.00 %
+Epoch:140/300 Train. Loss:3.322 Val. Loss:3.674 Training Acc. 62.38 % Val. Acc. 29.00 %
+Epoch:150/300 Train. Loss:3.311 Val. Loss:3.657 Training Acc. 63.12 % Val. Acc. 30.25 %
+Epoch:160/300 Train. Loss:3.305 Val. Loss:3.660 Training Acc. 63.94 % Val. Acc. 29.75 %
+Epoch:170/300 Train. Loss:3.299 Val. Loss:3.643 Training Acc. 64.56 % Val. Acc. 31.50 %
+Epoch:180/300 Train. Loss:3.292 Val. Loss:3.639 Training Acc. 65.25 % Val. Acc. 31.00 %
+Epoch:190/300 Train. Loss:3.297 Val. Loss:3.634 Training Acc. 64.56 % Val. Acc. 31.75 %
+Epoch:200/300 Train. Loss:3.261 Val. Loss:3.621 Training Acc. 68.31 % Val. Acc. 33.75 %
+Epoch:210/300 Train. Loss:3.265 Val. Loss:3.617 Training Acc. 67.69 % Val. Acc. 35.50 %
+Epoch:220/300 Train. Loss:3.254 Val. Loss:3.619 Training Acc. 68.81 % Val. Acc. 35.00 %
+Epoch:230/300 Train. Loss:3.245 Val. Loss:3.619 Training Acc. 69.75 % Val. Acc. 35.75 %
+Epoch:240/300 Train. Loss:3.257 Val. Loss:3.616 Training Acc. 68.56 % Val. Acc. 35.00 %
+Epoch:250/300 Train. Loss:3.255 Val. Loss:3.613 Training Acc. 68.94 % Val. Acc. 35.25 %
+Epoch:260/300 Train. Loss:3.258 Val. Loss:3.611 Training Acc. 68.62 % Val. Acc. 36.00 %
+Epoch:270/300 Train. Loss:3.245 Val. Loss:3.609 Training Acc. 70.19 % Val. Acc. 35.75 %
+Epoch:280/300 Train. Loss:3.287 Val. Loss:3.632 Training Acc. 66.12 % Val. Acc. 32.75 %
+Epoch:290/300 Train. Loss:3.255 Val. Loss:3.617 Training Acc. 68.56 % Val. Acc. 35.00 %
+Epoch:300/300 Train. Loss:3.258 Val. Loss:3.616 Training Acc. 68.38 % Val. Acc. 34.75 %
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.0002 
+ Weight Decay: 0.0001 
+with a mean acc. of 31.125000000000004
+Epoch:10/300 Train. Loss:3.816 Val. Loss:3.854 Training Acc. 15.38 % Val. Acc. 11.25 %
+Epoch:20/300 Train. Loss:3.742 Val. Loss:3.805 Training Acc. 21.50 % Val. Acc. 16.50 %
+Epoch:30/300 Train. Loss:3.643 Val. Loss:3.755 Training Acc. 31.62 % Val. Acc. 24.75 %
+Epoch:40/300 Train. Loss:3.595 Val. Loss:3.742 Training Acc. 35.75 % Val. Acc. 24.25 %
+Epoch:50/300 Train. Loss:3.564 Val. Loss:3.734 Training Acc. 38.31 % Val. Acc. 24.00 %
+Epoch:60/300 Train. Loss:3.532 Val. Loss:3.726 Training Acc. 41.69 % Val. Acc. 24.75 %
+Epoch:70/300 Train. Loss:3.508 Val. Loss:3.718 Training Acc. 43.88 % Val. Acc. 25.25 %
+Epoch:80/300 Train. Loss:3.496 Val. Loss:3.714 Training Acc. 45.38 % Val. Acc. 26.25 %
+Epoch:90/300 Train. Loss:3.469 Val. Loss:3.708 Training Acc. 47.88 % Val. Acc. 27.50 %
+Epoch:100/300 Train. Loss:3.451 Val. Loss:3.712 Training Acc. 49.44 % Val. Acc. 26.00 %
+Epoch:110/300 Train. Loss:3.434 Val. Loss:3.706 Training Acc. 51.38 % Val. Acc. 26.25 %
+Epoch:120/300 Train. Loss:3.415 Val. Loss:3.698 Training Acc. 52.94 % Val. Acc. 26.75 %
+Epoch:130/300 Train. Loss:3.397 Val. Loss:3.697 Training Acc. 54.87 % Val. Acc. 28.50 %
+Epoch:140/300 Train. Loss:3.383 Val. Loss:3.708 Training Acc. 56.38 % Val. Acc. 26.00 %
+Epoch:150/300 Train. Loss:3.370 Val. Loss:3.701 Training Acc. 57.63 % Val. Acc. 26.25 %
+Epoch:160/300 Train. Loss:3.352 Val. Loss:3.697 Training Acc. 59.06 % Val. Acc. 26.25 %
+Epoch:170/300 Train. Loss:3.355 Val. Loss:3.698 Training Acc. 59.13 % Val. Acc. 27.00 %
+Epoch:180/300 Train. Loss:3.344 Val. Loss:3.690 Training Acc. 60.00 % Val. Acc. 28.25 %
+Epoch:190/300 Train. Loss:3.308 Val. Loss:3.678 Training Acc. 64.44 % Val. Acc. 29.50 %
+Epoch:200/300 Train. Loss:3.286 Val. Loss:3.669 Training Acc. 66.19 % Val. Acc. 30.00 %
+Epoch:210/300 Train. Loss:3.287 Val. Loss:3.661 Training Acc. 65.69 % Val. Acc. 30.25 %
+Epoch:220/300 Train. Loss:3.281 Val. Loss:3.660 Training Acc. 66.00 % Val. Acc. 30.25 %
+Epoch:230/300 Train. Loss:3.291 Val. Loss:3.657 Training Acc. 64.94 % Val. Acc. 30.00 %
+Epoch:240/300 Train. Loss:3.259 Val. Loss:3.654 Training Acc. 68.44 % Val. Acc. 30.50 %
+Epoch:250/300 Train. Loss:3.290 Val. Loss:3.653 Training Acc. 65.38 % Val. Acc. 29.25 %
+Epoch:260/300 Train. Loss:3.278 Val. Loss:3.651 Training Acc. 66.75 % Val. Acc. 29.75 %
+Epoch:270/300 Train. Loss:3.283 Val. Loss:3.650 Training Acc. 65.81 % Val. Acc. 29.50 %
+Epoch:280/300 Train. Loss:3.286 Val. Loss:3.649 Training Acc. 65.56 % Val. Acc. 30.50 %
+Epoch:290/300 Train. Loss:3.288 Val. Loss:3.648 Training Acc. 65.50 % Val. Acc. 31.00 %
+Epoch:300/300 Train. Loss:3.272 Val. Loss:3.649 Training Acc. 67.25 % Val. Acc. 31.00 %
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.0005 
+ Weight Decay: 0.001 
+with a mean acc. of 31.874999999999996
+Epoch:10/300 Train. Loss:3.681 Val. Loss:3.776 Training Acc. 29.44 % Val. Acc. 22.50 %
+Epoch:20/300 Train. Loss:3.540 Val. Loss:3.739 Training Acc. 41.38 % Val. Acc. 25.00 %
+Epoch:30/300 Train. Loss:3.501 Val. Loss:3.723 Training Acc. 44.81 % Val. Acc. 26.25 %
+Epoch:40/300 Train. Loss:3.449 Val. Loss:3.714 Training Acc. 50.12 % Val. Acc. 26.75 %
+Epoch:50/300 Train. Loss:3.426 Val. Loss:3.716 Training Acc. 52.06 % Val. Acc. 26.00 %
+Epoch:60/300 Train. Loss:3.421 Val. Loss:3.705 Training Acc. 52.75 % Val. Acc. 30.00 %
+Epoch:70/300 Train. Loss:3.401 Val. Loss:3.698 Training Acc. 54.81 % Val. Acc. 28.75 %
+Epoch:80/300 Train. Loss:3.399 Val. Loss:3.685 Training Acc. 54.50 % Val. Acc. 31.00 %
+Epoch:90/300 Train. Loss:3.358 Val. Loss:3.686 Training Acc. 58.75 % Val. Acc. 29.75 %
+Epoch:100/300 Train. Loss:3.360 Val. Loss:3.679 Training Acc. 58.31 % Val. Acc. 30.25 %
+Epoch:110/300 Train. Loss:3.358 Val. Loss:3.681 Training Acc. 59.00 % Val. Acc. 29.25 %
+Epoch:120/300 Train. Loss:3.362 Val. Loss:3.684 Training Acc. 58.19 % Val. Acc. 28.75 %
+Epoch:130/300 Train. Loss:3.371 Val. Loss:3.683 Training Acc. 57.38 % Val. Acc. 28.50 %
+Epoch:140/300 Train. Loss:3.357 Val. Loss:3.677 Training Acc. 58.38 % Val. Acc. 29.00 %
+Epoch:150/300 Train. Loss:3.356 Val. Loss:3.680 Training Acc. 58.88 % Val. Acc. 28.00 %
+Epoch:160/300 Train. Loss:3.350 Val. Loss:3.680 Training Acc. 59.31 % Val. Acc. 27.75 %
+Epoch:170/300 Train. Loss:3.361 Val. Loss:3.679 Training Acc. 58.44 % Val. Acc. 30.25 %
+Epoch:180/300 Train. Loss:3.365 Val. Loss:3.677 Training Acc. 58.56 % Val. Acc. 29.50 %
+Epoch:190/300 Train. Loss:3.314 Val. Loss:3.669 Training Acc. 63.25 % Val. Acc. 30.75 %
+Epoch:200/300 Train. Loss:3.324 Val. Loss:3.664 Training Acc. 62.00 % Val. Acc. 30.25 %
+Epoch:210/300 Train. Loss:3.313 Val. Loss:3.666 Training Acc. 63.19 % Val. Acc. 29.50 %
+Epoch:220/300 Train. Loss:3.335 Val. Loss:3.676 Training Acc. 61.25 % Val. Acc. 29.25 %
+Epoch:230/300 Train. Loss:3.319 Val. Loss:3.666 Training Acc. 62.44 % Val. Acc. 30.25 %
+Epoch:240/300 Train. Loss:3.327 Val. Loss:3.668 Training Acc. 61.94 % Val. Acc. 30.75 %
+Early stopping
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.001 
+ Weight Decay: 0.001 
+with a mean acc. of 31.937500000000007
+Epoch:10/300 Train. Loss:3.547 Val. Loss:3.721 Training Acc. 41.19 % Val. Acc. 26.00 %
+Epoch:20/300 Train. Loss:3.381 Val. Loss:3.687 Training Acc. 56.88 % Val. Acc. 28.25 %
+Epoch:30/300 Train. Loss:3.341 Val. Loss:3.665 Training Acc. 60.75 % Val. Acc. 32.00 %
+Epoch:40/300 Train. Loss:3.321 Val. Loss:3.647 Training Acc. 62.81 % Val. Acc. 32.75 %
+Epoch:50/300 Train. Loss:3.321 Val. Loss:3.627 Training Acc. 62.56 % Val. Acc. 33.75 %
+Epoch:60/300 Train. Loss:3.307 Val. Loss:3.629 Training Acc. 63.94 % Val. Acc. 35.75 %
+Epoch:70/300 Train. Loss:3.303 Val. Loss:3.628 Training Acc. 64.25 % Val. Acc. 36.25 %
+Epoch:80/300 Train. Loss:3.284 Val. Loss:3.622 Training Acc. 66.25 % Val. Acc. 34.50 %
+Epoch:90/300 Train. Loss:3.275 Val. Loss:3.613 Training Acc. 66.69 % Val. Acc. 36.75 %
+Epoch:100/300 Train. Loss:3.256 Val. Loss:3.607 Training Acc. 68.75 % Val. Acc. 37.00 %
+Epoch:110/300 Train. Loss:3.276 Val. Loss:3.606 Training Acc. 66.88 % Val. Acc. 37.00 %
+Epoch:120/300 Train. Loss:3.286 Val. Loss:3.622 Training Acc. 66.56 % Val. Acc. 35.50 %
+Epoch:130/300 Train. Loss:3.260 Val. Loss:3.612 Training Acc. 68.56 % Val. Acc. 35.00 %
+Epoch:140/300 Train. Loss:3.255 Val. Loss:3.603 Training Acc. 69.00 % Val. Acc. 37.25 %
+Early stopping
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.0005 
+ Weight Decay: 0.001 
+with a mean acc. of 33.875
+Epoch:10/300 Train. Loss:3.574 Val. Loss:3.740 Training Acc. 39.56 % Val. Acc. 27.75 %
+Epoch:20/300 Train. Loss:3.444 Val. Loss:3.717 Training Acc. 51.31 % Val. Acc. 30.25 %
+Epoch:30/300 Train. Loss:3.374 Val. Loss:3.700 Training Acc. 57.69 % Val. Acc. 31.25 %
+Epoch:40/300 Train. Loss:3.342 Val. Loss:3.692 Training Acc. 60.19 % Val. Acc. 30.50 %
+Epoch:50/300 Train. Loss:3.309 Val. Loss:3.689 Training Acc. 63.88 % Val. Acc. 30.25 %
+Epoch:60/300 Train. Loss:3.298 Val. Loss:3.675 Training Acc. 64.94 % Val. Acc. 32.50 %
+Epoch:70/300 Train. Loss:3.283 Val. Loss:3.666 Training Acc. 66.56 % Val. Acc. 32.25 %
+Epoch:80/300 Train. Loss:3.265 Val. Loss:3.665 Training Acc. 67.94 % Val. Acc. 32.50 %
+Epoch:90/300 Train. Loss:3.267 Val. Loss:3.663 Training Acc. 67.94 % Val. Acc. 32.25 %
+Epoch:100/300 Train. Loss:3.258 Val. Loss:3.660 Training Acc. 68.56 % Val. Acc. 32.50 %
+Epoch:110/300 Train. Loss:3.260 Val. Loss:3.653 Training Acc. 69.31 % Val. Acc. 32.50 %
+Epoch:120/300 Train. Loss:3.242 Val. Loss:3.645 Training Acc. 70.31 % Val. Acc. 33.75 %
+Epoch:130/300 Train. Loss:3.247 Val. Loss:3.646 Training Acc. 69.75 % Val. Acc. 34.25 %
+Epoch:140/300 Train. Loss:3.245 Val. Loss:3.649 Training Acc. 69.94 % Val. Acc. 33.75 %
+Epoch:150/300 Train. Loss:3.241 Val. Loss:3.648 Training Acc. 70.38 % Val. Acc. 33.25 %
+Epoch:160/300 Train. Loss:3.241 Val. Loss:3.642 Training Acc. 70.12 % Val. Acc. 33.50 %
+Early stopping
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.0005 
+ Weight Decay: 0.001 
+with a mean acc. of 34.0625
+Epoch:10/300 Train. Loss:3.609 Val. Loss:3.791 Training Acc. 36.00 % Val. Acc. 20.00 %
+Epoch:20/300 Train. Loss:3.447 Val. Loss:3.758 Training Acc. 51.50 % Val. Acc. 24.25 %
+Epoch:30/300 Train. Loss:3.383 Val. Loss:3.752 Training Acc. 57.00 % Val. Acc. 24.50 %
+Epoch:40/300 Train. Loss:3.321 Val. Loss:3.731 Training Acc. 63.00 % Val. Acc. 26.25 %
+Epoch:50/300 Train. Loss:3.310 Val. Loss:3.710 Training Acc. 63.50 % Val. Acc. 27.50 %
+Epoch:60/300 Train. Loss:3.315 Val. Loss:3.704 Training Acc. 63.19 % Val. Acc. 27.50 %
+Epoch:70/300 Train. Loss:3.293 Val. Loss:3.694 Training Acc. 65.19 % Val. Acc. 28.75 %
+Epoch:80/300 Train. Loss:3.284 Val. Loss:3.695 Training Acc. 66.81 % Val. Acc. 28.50 %
+Epoch:90/300 Train. Loss:3.258 Val. Loss:3.688 Training Acc. 68.56 % Val. Acc. 30.00 %
+Epoch:100/300 Train. Loss:3.251 Val. Loss:3.682 Training Acc. 69.62 % Val. Acc. 31.00 %
+Epoch:110/300 Train. Loss:3.261 Val. Loss:3.679 Training Acc. 68.75 % Val. Acc. 30.75 %
+Epoch:120/300 Train. Loss:3.255 Val. Loss:3.674 Training Acc. 69.06 % Val. Acc. 31.00 %
+Epoch:130/300 Train. Loss:3.253 Val. Loss:3.677 Training Acc. 69.31 % Val. Acc. 32.00 %
+Epoch:140/300 Train. Loss:3.244 Val. Loss:3.669 Training Acc. 69.94 % Val. Acc. 32.00 %
+Epoch:150/300 Train. Loss:3.254 Val. Loss:3.667 Training Acc. 68.88 % Val. Acc. 33.25 %
+Epoch:160/300 Train. Loss:3.239 Val. Loss:3.670 Training Acc. 70.81 % Val. Acc. 31.25 %
+Epoch:170/300 Train. Loss:3.257 Val. Loss:3.667 Training Acc. 68.81 % Val. Acc. 32.25 %
+Epoch:180/300 Train. Loss:3.253 Val. Loss:3.666 Training Acc. 69.12 % Val. Acc. 31.25 %
+Epoch:190/300 Train. Loss:3.250 Val. Loss:3.668 Training Acc. 69.44 % Val. Acc. 31.25 %
+Epoch:200/300 Train. Loss:3.240 Val. Loss:3.656 Training Acc. 70.50 % Val. Acc. 33.75 %
+Epoch:210/300 Train. Loss:3.240 Val. Loss:3.660 Training Acc. 70.94 % Val. Acc. 32.00 %
+Epoch:220/300 Train. Loss:3.226 Val. Loss:3.654 Training Acc. 71.88 % Val. Acc. 32.25 %
+Epoch:230/300 Train. Loss:3.222 Val. Loss:3.652 Training Acc. 72.31 % Val. Acc. 33.50 %
+Epoch:240/300 Train. Loss:3.235 Val. Loss:3.652 Training Acc. 71.19 % Val. Acc. 33.25 %
+Epoch:250/300 Train. Loss:3.228 Val. Loss:3.652 Training Acc. 71.69 % Val. Acc. 35.00 %
+Epoch:260/300 Train. Loss:3.230 Val. Loss:3.653 Training Acc. 71.62 % Val. Acc. 34.00 %
+Epoch:270/300 Train. Loss:3.238 Val. Loss:3.666 Training Acc. 71.12 % Val. Acc. 30.50 %
+Epoch:280/300 Train. Loss:3.229 Val. Loss:3.655 Training Acc. 71.50 % Val. Acc. 33.00 %
+Epoch:290/300 Train. Loss:3.218 Val. Loss:3.653 Training Acc. 72.81 % Val. Acc. 33.50 %
+Epoch:300/300 Train. Loss:3.222 Val. Loss:3.654 Training Acc. 72.31 % Val. Acc. 34.00 %
+ Using device: cuda:0
+Entering main loop
+Entering AL loop
+ITERATION 1 of 1
+Iteration: 0 	 Trainsize: 1600 	 Poolsize: 0
+Chosen hyperparameters based on 5 folds: 
+ LR: 0.0005 
+ Weight Decay: 0.001 
+with a mean acc. of 33.125
+Epoch:10/300 Train. Loss:3.567 Val. Loss:3.788 Training Acc. 39.88 % Val. Acc. 22.50 %
+Epoch:20/300 Train. Loss:3.424 Val. Loss:3.779 Training Acc. 52.75 % Val. Acc. 20.75 %
+Epoch:30/300 Train. Loss:3.347 Val. Loss:3.751 Training Acc. 60.94 % Val. Acc. 23.25 %
+Epoch:40/300 Train. Loss:3.283 Val. Loss:3.734 Training Acc. 66.75 % Val. Acc. 24.25 %
+Epoch:50/300 Train. Loss:3.240 Val. Loss:3.707 Training Acc. 70.62 % Val. Acc. 28.00 %
+Epoch:60/300 Train. Loss:3.245 Val. Loss:3.700 Training Acc. 69.94 % Val. Acc. 27.75 %
+Epoch:70/300 Train. Loss:3.222 Val. Loss:3.688 Training Acc. 72.44 % Val. Acc. 29.25 %
+Epoch:80/300 Train. Loss:3.210 Val. Loss:3.683 Training Acc. 73.50 % Val. Acc. 30.25 %
+Epoch:90/300 Train. Loss:3.213 Val. Loss:3.675 Training Acc. 73.75 % Val. Acc. 32.00 %
+Epoch:100/300 Train. Loss:3.197 Val. Loss:3.670 Training Acc. 75.00 % Val. Acc. 31.75 %
+Epoch:110/300 Train. Loss:3.210 Val. Loss:3.664 Training Acc. 73.50 % Val. Acc. 31.25 %
+Epoch:120/300 Train. Loss:3.210 Val. Loss:3.664 Training Acc. 73.88 % Val. Acc. 33.00 %
+Epoch:130/300 Train. Loss:3.194 Val. Loss:3.659 Training Acc. 75.19 % Val. Acc. 33.50 %
+Epoch:140/300 Train. Loss:3.191 Val. Loss:3.653 Training Acc. 75.75 % Val. Acc. 34.50 %
+Epoch:150/300 Train. Loss:3.197 Val. Loss:3.655 Training Acc. 74.94 % Val. Acc. 33.75 %
+Epoch:160/300 Train. Loss:3.198 Val. Loss:3.650 Training Acc. 75.12 % Val. Acc. 34.25 %
+Epoch:170/300 Train. Loss:3.186 Val. Loss:3.664 Training Acc. 76.44 % Val. Acc. 31.00 %
+Epoch:180/300 Train. Loss:3.188 Val. Loss:3.644 Training Acc. 75.75 % Val. Acc. 35.25 %
+Epoch:190/300 Train. Loss:3.194 Val. Loss:3.644 Training Acc. 75.12 % Val. Acc. 36.00 %
+Epoch:200/300 Train. Loss:3.169 Val. Loss:3.638 Training Acc. 77.62 % Val. Acc. 37.25 %
+Epoch:210/300 Train. Loss:3.188 Val. Loss:3.646 Training Acc. 75.69 % Val. Acc. 35.00 %
+Epoch:220/300 Train. Loss:3.187 Val. Loss:3.643 Training Acc. 75.94 % Val. Acc. 36.50 %
+Epoch:230/300 Train. Loss:3.170 Val. Loss:3.648 Training Acc. 77.44 % Val. Acc. 35.00 %
+Epoch:240/300 Train. Loss:3.176 Val. Loss:3.638 Training Acc. 77.12 % Val. Acc. 37.25 %
+Epoch:250/300 Train. Loss:3.174 Val. Loss:3.645 Training Acc. 77.25 % Val. Acc. 34.50 %
+Early stopping
+All done :)

@@ -1,0 +1,69 @@
+defaults:
+  - exp: setup1
+  - _self_
+
+# Active Learning
+budget: 1600
+initial_budget: 1600
+n_avg: 5
+n_samples: 0
+sample_first: False
+
+# Example use: VAAL where it is model agnostic
+load_queries: False
+save_queries: False
+
+# General setup
+dataset_folder: data/processed/ESC50
+batch_size: 32
+seed: 41
+AL_methods: ["Random"]
+TaskLearners: ["MobileNet"]
+early_stop: 50
+
+# Extra genaeral options
+use_navg_as_DR: False
+use_plots: False
+
+# Tasklearner
+n_class: 50
+num_epochs: 300
+
+# Paths
+paths:
+  train: ${dataset_folder}/train.csv
+  test: ${dataset_folder}/test.csv
+
+
+# Hyperparameter optimization
+n_folds: 5
+
+VAAL:
+  dataset_size: 1600
+  train: ${dataset_folder}/train_32x32
+  test: ${dataset_folder}/test_32x32
+  adversary_params: [1, 10, 25] 
+  beta: 1
+  num_vae_steps: [1, 2, 3, 4, 5] 
+  num_adv_steps: [1, 2, 3, 4, 5]
+  n_folds: 3
+  epochs: 100
+
+Simple:
+  train: ${dataset_folder}/train_pca.pt
+  test: ${dataset_folder}/test_pca.pt
+  DR: 700
+  learning_rates: [0.01, 0.001, 0.0005]
+  weight_decays: [0.01, 0.005, 0.001]
+  Optimizer: 'Adam'
+  aud_conf: {}
+
+MobileNet:
+  train: ${dataset_folder}/train_498x128
+  test: ${dataset_folder}/test_498x128
+  DR: False
+  learning_rates: [0.0002, 0.0001, 0,00005]
+  weight_decays:  [0.0001, 0.00005, 0.00001]
+  Optimizer: 'Adam'
+
+
