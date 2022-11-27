@@ -11,7 +11,7 @@ The purpot of this document is to build up the 2 out of 3 neural networks that a
 The 3rd model is the task learner which we in the main script import seperately as this will vary between experiments
 """
 
-# All below is taken and slightly from VAAL GitHub: https://github.com/sinhasam/vaal
+# All below is taken and slightly changed from VAAL GitHub: https://github.com/sinhasam/vaal
 class View(nn.Module):
     def __init__(self, size):
         super(View, self).__init__()
@@ -72,18 +72,18 @@ class VAE(nn.Module):
         )  # B, z_dim
 
         self.decoder = nn.Sequential(
-            nn.Linear(z_dim, 1024 * (multiplier * 4) * (multiplier * 4)),  # B, 1024*8*8
-            View((-1, 1024, (multiplier * 4), (multiplier * 4))),  # B, 1024,  8,  8
-            nn.ConvTranspose2d(1024, 512, 4, 2, 1, bias=False),  # B,  512, 16, 16
+            nn.Linear(z_dim, 1024 * (multiplier * 4) * (multiplier * 4)),  # B, 1024*4*4
+            View((-1, 1024, (multiplier * 4), (multiplier * 4))),  # B, 1024,  4,  3
+            nn.ConvTranspose2d(1024, 512, 4, 2, 1, bias=False),  # B,  512, 8, 18
             nn.BatchNorm2d(512),
             nn.ReLU(True),
-            nn.ConvTranspose2d(512, 256, 4, 2, 1, bias=False),  # B,  256, 32, 32
+            nn.ConvTranspose2d(512, 256, 4, 2, 1, bias=False),  # B,  256, 16, 16
             nn.BatchNorm2d(256),
             nn.ReLU(True),
-            nn.ConvTranspose2d(256, 128, 4, 2, 1, bias=False),  # B,  128, 64, 64
+            nn.ConvTranspose2d(256, 128, 4, 2, 1, bias=False),  # B,  128, 32, 32
             nn.BatchNorm2d(128),
             nn.ReLU(True),
-            nn.ConvTranspose2d(128, nc, 1),  # B,   nc, 64, 64
+            nn.ConvTranspose2d(128, nc, 1),  # B, 1, 64, 64
         )
         self.weight_init()
 

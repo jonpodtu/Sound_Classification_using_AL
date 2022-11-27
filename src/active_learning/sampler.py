@@ -117,6 +117,13 @@ def sample_with_vaal(
     solver = Solver(cfg=cfg)
     vae = VAE(32)
     discriminator = Discriminator(32)
+
+    if cfg.VAAL.pretrain:
+        vae_path=to_absolute_path(cfg.VAAL.pretrain)
+        vae_params=torch.load(vae_path)
+        vae.load_state_dict(vae_params)
+        print("Loaded VAE from: ", vae_params)
+
     vae, discriminator, loss_df = solver.train(
         device, query_dataloader, vae, discriminator, pool_dataloader
     )

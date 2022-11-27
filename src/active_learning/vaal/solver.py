@@ -4,9 +4,14 @@ import torch.optim as optim
 from sklearn.metrics import accuracy_score
 import numpy as np
 import pandas as pd
+
+
 from tqdm import tqdm
 
+
 # All code taken from the VAAL github https://github.com/sinhasam/vaal
+
+
 class Solver:
     def __init__(self, cfg):
         # self.test_dataloader = test_dataloader
@@ -17,13 +22,19 @@ class Solver:
         # Hardcoded training parameters for VAE and Discriminator
         self.num_vae_steps = 2
         self.num_adv_steps = 1
-        self.beta = 1
+        self.beta = cfg.VAAL.beta
         self.adversary_param = 1
         self.train_epochs = cfg.VAAL.epochs
 
         self.bce_loss = nn.BCELoss()
         self.mse_loss = nn.MSELoss()
         self.ce_loss = nn.CrossEntropyLoss()
+
+        # Pretrain
+        if cfg.VAAL.pretrain:
+            self.pretrain = True
+        else:
+            self.pretrain = False
 
     def read_data(self, dataloader, labels=True):
         if labels:
@@ -45,7 +56,10 @@ class Solver:
         labeled_data = self.read_data(querry_dataloader)
         unlabeled_data = self.read_data(unlabeled_dataloader, labels=False)
 
-        optim_vae = optim.Adam(vae.parameters(), lr=5e-4)
+        if self.pretrain:
+            optim_vae = optim.Adam(vae.parameters(), lr=5e-5)
+        else:
+            optim_vae = optim.Adam(vae.parameters(), lr=5e-4)
         optim_discriminator = optim.Adam(discriminator.parameters(), lr=5e-4)
 
         vae.train()

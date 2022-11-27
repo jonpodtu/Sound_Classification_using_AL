@@ -68,6 +68,7 @@ class ALframework:
 
         for i in range(self.n_iterations):
             model_save = os.path.join(save_path, "models")
+
             # LETS MAKE A POOL
             pool_indices = np.setdiff1d(list(self.all_indices), current_indices)
             pool_sampler = SubsetRandomSampler(pool_indices)
@@ -114,6 +115,7 @@ class ALframework:
                     ),
                     index_col=0,
                 )
+                results["ActiveLearn"] = [AL_method] * len(results)
 
             else:
                 # 1. Fit the model
@@ -178,6 +180,10 @@ class ALframework:
                     preds=predictions, indices=indices, n_samples=self.cfg.n_samples
                 )
             elif AL_method == "VAAL":
+                if self.cfg.VAAL.save_model:
+                    vaal_save = model_save
+                else:
+                    vaal_save = False
                 (
                     pool_info,
                     train_info,
@@ -187,7 +193,7 @@ class ALframework:
                     vae,
                     loss_df,
                 ) = sample_with_vaal(
-                    False,
+                    vaal_save,
                     self.device,
                     n_samples=self.cfg.n_samples,
                     cfg=self.cfg,

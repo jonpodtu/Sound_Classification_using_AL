@@ -7,12 +7,12 @@ from tqdm import tqdm
 import hydra
 from omegaconf import DictConfig, OmegaConf
 from hydra.utils import to_absolute_path
-from utils.helper import result_handler
 import os
 import pandas as pd
+from ast import literal_eval
 
 
-@hydra.main(config_path="config", config_name="ESC_3Class_VAAL")
+@hydra.main(config_path="config", config_name="WSA1K")
 def main(cfg: DictConfig) -> None:
     print(OmegaConf.to_yaml(cfg))
     print("Everything will be dropped in the working directory: {}".format(os.getcwd()))
@@ -38,6 +38,26 @@ def main(cfg: DictConfig) -> None:
             print(
                 f"Using predifined list of indices as initial indices. Initial budget is {cfg.initial_budget} and the indices are \n{initial_indices}"
             )
+        elif cfg.sample_first:
+            # If we use the sample first method, we wish to load same indices again (continue run)
+            results = pd.read_csv(
+                os.path.join(
+                    *[
+                        f"{n}",
+                        cfg.sample_first,
+                        "{}_results.csv".format(cfg.initial_budget),
+                    ],
+                ),
+                index_col=0,
+            )
+            n_results = results[results["train_size"] == cfg.initial_budget]
+            initial_indices = literal_eval(n_results["current_indices"].iloc[0])
+            print(
+                "Loading {} samples with following indices: {}".format(
+                    len(initial_indices), initial_indices
+                )
+            )
+
         elif cfg.initial_budget < len(all_indices):
             _, initial_indices = train_test_split(
                 all_indices,
@@ -74,10 +94,18 @@ def main(cfg: DictConfig) -> None:
             test_dataloader = DataLoader(
                 test_set, batch_size=cfg.batch_size, drop_last=False
             )
-
             for AL_method in cfg.AL_methods:
-                # Path for all output
-                save_path = os.path.join(*[f"{n}", AL_method, TaskLearner])
+                # Path for all output. Whether we want to use the different starts experiment or not
+                if cfg.diff_starts:
+                    print(
+                        "Running diff_start model which means it will lie under different start folders "
+                    )
+                    diff_starts = f"st_{cfg.initial_budget}"
+                    save_path = os.path.join(
+                        *[diff_starts, f"{n}", AL_method, TaskLearner]
+                    )
+                else:
+                    save_path = os.path.join(*[f"{n}", AL_method, TaskLearner])
                 print("Entering AL loop")
                 ActiveLearning.run(
                     train_dataset=train_set,

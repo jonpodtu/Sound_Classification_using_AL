@@ -1,57 +1,55 @@
 defaults:
-  - exp: setup1
   - _self_
 
 # Active Learning
-budget: 800
-initial_budget: 100
+budget: 1000
+initial_budget: 200
 n_avg: 5
 n_samples: 100
-sample_first: False
+sample_first: False # For instance: "Random/Simple" or 'AL_method/TaskLearner' for the folder you want to sample from
+diff_starts: False  # Different starts experiment
 
 # Example use: VAAL where it is model agnostic
-load_queries: False # Path or False
+load_queries: False # Path to where to load from or False
 save_queries: False # True or False
 
+
 # General setup
-dataset_folder: data/processed/ESC50
-batch_size: 4
+dataset_folder: data/processed/ESC-50
+batch_size: 32
 seed: 41
-AL_methods: ["Uncertain+Random", "VAAL", "Random", "Uncertainty"]
+AL_methods: ["Random","Uncertainty", "Uncertain+Random", "VAAL"] # 
 TaskLearners: ["Simple","MobileNet"]
-early_stop: 50
+early_stop: 50  # The patience of the earlier stop
 
 # Extra genaeral options
-use_navg_as_DR: False
+use_navg_as_DR: False # Used for finding the best number of principal components
 use_plots: False
 
 # Tasklearner
-n_class: 3
-num_epochs: 50
+n_class: 50
+num_epochs: 300
 
 # Paths
 paths:
   train: ${dataset_folder}/train.csv
   test: ${dataset_folder}/test.csv
 
-
 # Hyperparameter optimization
 n_folds: 5
 
 VAAL:
-  dataset_size: 1600
-  train: ${dataset_folder}/train_128x128
-  test: ${dataset_folder}/test_128x128
-  adversary_params: [1, 10, 25] 
+  dataset_size: 1015 # Train dataset only 
+  train: ${dataset_folder}/train_64x64
+  test: ${dataset_folder}/test_64x64
+  epochs: 150
+  pretrain: "models/vae.pt"
+  save_model: True
   beta: 1
-  num_vae_steps: [1, 2, 3, 4, 5] 
-  num_adv_steps: [1, 2, 3, 4, 5]
-  n_folds: 3
-  epochs: 100
 
 Simple:
-  train: ${dataset_folder}/train_pca.pt
-  test: ${dataset_folder}/test_pca.pt
+  train: ${dataset_folder}/PCA_498x128/train.pt
+  test: ${dataset_folder}/PCA_498x128/test.pt
   DR: 700
   learning_rates: [0.01, 0.001, 0.0005]
   weight_decays: [0.01, 0.005, 0.001]
