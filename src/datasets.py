@@ -226,8 +226,9 @@ class ESC50(Dataset):
 
         return out, label, index  # Has to be return as x, y, index
 
+
 ################################################
-#### Slightly altered dataloader for ESC-US ####
+#### Slightly changed dataloader for ESC-US ####
 ################################################
 import os
 import pandas as pd
@@ -263,7 +264,6 @@ class ESC_US_process(Dataset):
         self.noisy = noisy
         self.save_processed = save_processed
 
-
     def __len__(self):
         return len(self.audio_labels)
 
@@ -280,7 +280,7 @@ class ESC_US_process(Dataset):
         except:
             print("Skiped {} due to reading problems".format(audio_path))
             return False, None
-            
+
         # waveform = waveform.to(torch.float)
         filterbank = self.waveform_to_filterbank(
             waveform, samplerate, self.audio_conf.get("n_mels")
@@ -288,10 +288,7 @@ class ESC_US_process(Dataset):
 
         if self.transform:
             resizer = torchvision.transforms.Resize(
-                (
-                    self.audio_conf.get("target_length"),
-                    self.audio_conf.get("n_mels"),
-                )
+                (self.audio_conf.get("target_length"), self.audio_conf.get("n_mels"),)
             )
             # Add dummy dimensions:
             filterbank = filterbank[None, None, :]
@@ -321,7 +318,9 @@ class ESC_US_process(Dataset):
 
         out = filterbank
         if self.save_processed:
-            no_fextensin = os.path.splitext(os.path.basename(self.audio_labels.iloc[index]))[0]
+            no_fextensin = os.path.splitext(
+                os.path.basename(self.audio_labels.iloc[index])
+            )[0]
             filename = no_fextensin + ".pt"
             audio_path = os.path.join(self.save_processed, filename)
             torch.save(out, audio_path)
@@ -350,6 +349,7 @@ class ESC_US_process(Dataset):
         )
         return filterbank
 
+
 class ESC_US_Normalize(Dataset):
     def __init__(
         self,
@@ -357,16 +357,15 @@ class ESC_US_Normalize(Dataset):
         audio_dir,
         audio_conf={},
         normalize=True,
-        save_processed=None,  
+        save_processed=None,
     ):
-        self.audio_labels =annotations_file
+        self.audio_labels = annotations_file
         self.audio_dir = audio_dir
         self.audio_conf = audio_conf
         self.normalize = (
             normalize  # Only set to false when creating the mean and std statistics.
         )
         self.save_processed = save_processed
-
 
     def __len__(self):
         return len(self.audio_labels)
@@ -392,23 +391,22 @@ class ESC_US_Normalize(Dataset):
 
         out = filterbank
         if self.save_processed:
-            no_fextensin = os.path.splitext(os.path.basename(self.audio_labels.iloc[index]))[0]
+            no_fextensin = os.path.splitext(
+                os.path.basename(self.audio_labels.iloc[index])
+            )[0]
             filename = no_fextensin + ".pt"
             audio_path = os.path.join(self.save_processed, filename)
             torch.save(out, audio_path)
 
-
         return out, index  # Has to be return as x, y, index
+
 
 class ESC_US(Dataset):
     def __init__(
-        self,
-        annotations_file,
-        audio_dir,
+        self, annotations_file, audio_dir,
     ):
         self.audio_labels = annotations_file
         self.audio_dir = audio_dir
-
 
     def __len__(self):
         return len(self.audio_labels)
